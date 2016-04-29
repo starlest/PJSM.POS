@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="PUJASM.POS.Views.SalesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" d:DesignWidth="1024">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding  Key="F1"  Command="{Binding ProceedTransactionCommand}"/>
+        <KeyBinding  Key="F5"  Command="{Binding NewTransactionCommand}"/>
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.125*" />
+            <RowDefinition Height="0.125*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.375*" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="(F5) New" Command="{Binding NewTransactionCommand}" />
+            <TextBlock Grid.Column="1" Foreground="Red" Text="{Binding SalesTransactionID}" />
+            <Button Grid.Column="5" Content="(F1) Proceed" Command="{Binding ProceedTransactionCommand}" />
+        </Grid>
+        <Border Grid.Row="1" BorderBrush="Blue" BorderThickness="2">
+            <Grid DataContext="{Binding NewEntryVM}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.75*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Product ID:" />
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewEntryItemID, UpdateSourceTrigger=Explicit, StringFormat=N2}"
+                         PreviewKeyDown="TextBox_OnPreviewKeyDown" />
+            </Grid>
+        </Border>
+        <DataGrid LoadingRow="DataGrid_LoadingRow" Grid.Row="2" ItemsSource="{Binding DisplayedLines}" SelectedItem="{Binding SelectedLine}"
+                  CanUserSortColumns="False" IsReadOnly="True" IsEnabled="{Binding IsTransactionNotPaid}">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" HorizontalAlignment="Left" Command="{Binding DeleteLineCommand}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Width="1*" Binding="{Binding Item.ID}" />
+                <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Item.Name}" />
+                <DataGridTextColumn Header="Quantity" Width="1*" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Price" Width="1*" Binding="{Binding SalesPrice, StringFormat=N2}" />
+                <DataGridTextColumn Header="Discount" Width="1*" Binding="{Binding Discount, StringFormat=N2}" />
+                <DataGridTextColumn Header="Total" Width="1*" Binding="{Binding Total, StringFormat=N2}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Margin="10, 0, 0, 0" HorizontalAlignment="Left" Text="Note: " />
+            <TextBox Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                         VerticalContentAlignment="Top" Height="Auto" Margin="69,15,55,40" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                         MaxLength="500" Text="{Binding TransactionNotes, Mode=TwoWay}"  />
+            <TextBlock Grid.Row="0" Grid.Column="4" Foreground="Blue" Text="Member: " />
+            <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding TransactionCustomer, Mode=OneWay, StringFormat=N2}" />
+            <TextBlock Grid.Row="0" Grid.Column="7" Text="Total: " />
+            <TextBox Grid.Row="0" Grid.Column="8" Text="{Binding TransactionGrossTotal, Mode=OneWay, StringFormat=N2}" IsEnabled="False" />
+            <TextBlock Grid.Row="1" Grid.Column="7" Text="Discount:" />
+            <TextBox Grid.Row="1" Grid.Column="8" Text="{Binding TransactionDiscount, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
+                     IsEnabled="False" />
+            <TextBlock Grid.Row="2" Grid.Column="7" Foreground="Red" Text="Net Total: " />
+            <TextBox Grid.Row="2" Grid.Column="8" Foreground="Red" Text="{Binding TransactionNetTotal, Mode=OneWay, StringFormat=N2}" IsEnabled="False" />
+        </Grid>
+    </Grid>
+</UserControl>
