@@ -1,6 +1,8 @@
 ﻿namespace PUJASM.POS.ViewModels
 {
     using Models;
+    using Models.Item;
+    using Models.Sales;
     using MVVMFramework;
 
     public class SalesTransactionLineVM : ViewModelBase<SalesTransactionLine>

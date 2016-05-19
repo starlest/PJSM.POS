@@ -1,9 +1,10 @@
-﻿namespace PUJASM.POS.Models
+﻿namespace PUJASM.POS.Models.Item
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Sales;
 
     [Table("Inventory")]
     #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()

@@ -4,6 +4,10 @@ namespace PUJASM.POS.Utilities
     using System.Data.Entity.ModelConfiguration.Conventions;
     using Models;
     using ERP.Models;
+    using Models.Item;
+    using Models.Ledger;
+    using Models.Purchase;
+    using Models.Sales;
 
     public class ERPContext : DbContext
     {

@@ -3,6 +3,8 @@
     using System.Linq;
     using System.Transactions;
     using Models;
+    using Models.Ledger;
+    using Models.Sales;
 
     internal static class SalesTransactionHelper
     {

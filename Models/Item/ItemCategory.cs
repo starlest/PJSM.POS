@@ -1,9 +1,9 @@
-﻿namespace PUJASM.POS.Models
+﻿namespace PUJASM.POS.Models.Item
 {
     using System.Collections.Generic;
     using MVVMFramework;
 
-#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
+    #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
     public class ItemCategory : ObservableObject
     {
         public int ID { get; set; }

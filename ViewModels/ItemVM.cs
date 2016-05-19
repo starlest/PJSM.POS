@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using Models;
+    using Models.Item;
     using MVVMFramework;
 
     public class ItemVM : ViewModelBase<Item>

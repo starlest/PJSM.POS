@@ -2,14 +2,19 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Drawing.Printing;
     using System.Linq;
     using System.Windows;
+    using System.Windows.Forms;
     using System.Windows.Input;
-    using Models;
+    using Models.Item;
+    using Models.Sales;
     using MVVMFramework;
     using Utilities;
     using Utilities.ModelHelpers;
     using Views;
+    using Application = System.Windows.Application;
+    using MessageBox = System.Windows.MessageBox;
 
     public class SalesVM : ViewModelBase<SalesTransaction>
     {
@@ -24,6 +29,7 @@
         private decimal _transactionReceive;
         private decimal _transactionChange;
         private ICommand _confirmTransactionCommand;
+        private ICommand _newTransactionCommand;
         #endregion
 
         public SalesVM()
@@ -135,6 +141,9 @@
             return true;
         }
 
+        public ICommand NewTransactionCommand => _newTransactionCommand ?? (_newTransactionCommand =
+            new RelayCommand(ResetTransaction));
+
         public ICommand ConfirmTransactionCommand
         {
             get
@@ -144,7 +153,7 @@
                     {                     
                         if (!IsConfirmationYes() || !IsAmountReceivedSufficient()) return;
                         AssignTransactionPropertiesToModel();
-                        //PrintReceipt();
+                        PrintReceiptForTransaction();
                         SalesTransactionHelper.SaveTransaction(Model);
                         //AddPointsToCustomer();
                         ResetTransaction();
@@ -260,6 +269,35 @@
         {
             foreach (var line in DisplayedLines)
                 Model.SalesTransactionLines.Add(line.Model);
+        }
+        #endregion
+
+        #region Print Receipt Helper Methods
+        public void PrintReceiptForTransaction()
+        {
+            using (var recordDoc = new PrintDocument {DocumentName = "Customer Receipt"})
+            {
+
+                var printer = new ReceiptPrinter(Model);
+                recordDoc.PrintPage += printer.PrintReceiptPage;
+                recordDoc.PrintController = new StandardPrintController(); // hides status dialog popup
+
+                // Comment if debugging 
+                var printerSettings = new PrinterSettings { PrinterName = "EPSON TM-U220 ReceiptE4" };
+                recordDoc.PrinterSettings = printerSettings;
+                recordDoc.Print();
+
+                // --------------------------------------
+                // Uncomment if debugging - shows dialog instead
+                //var printPrvDlg = new PrintPreviewDialog
+                //{
+                //    Document = recordDoc,
+                //    Width = 1200,
+                //    Height = 800
+                //};
+                //printPrvDlg.ShowDialog();
+                // --------------------------------------
+            }
         }
         #endregion
     }

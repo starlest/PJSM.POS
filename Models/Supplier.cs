@@ -26,7 +26,7 @@
 
         public bool IsActive { get; set; }
 
-        public virtual ObservableCollection<Item> Items { get; set; }
+        public virtual ObservableCollection<Item.Item> Items { get; set; }
 
         public override string ToString() { return Name; }
         

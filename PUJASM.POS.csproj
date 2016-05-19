@@ -51,7 +51,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,13 +81,14 @@
     <Compile Include="Models\Ledger\LedgerGeneral.cs" />
     <Compile Include="Models\Ledger\LedgerTransaction.cs" />
     <Compile Include="Models\Ledger\LedgerTransactionLine.cs" />
-    <Compile Include="Models\Promotion.cs" />
-    <Compile Include="Models\PurchaseTransaction.cs" />
-    <Compile Include="Models\PurchaseTransactionLine.cs" />
+    <Compile Include="Models\Item\Promotion.cs" />
+    <Compile Include="Models\Purchase\PurchaseTransaction.cs" />
+    <Compile Include="Models\Purchase\PurchaseTransactionLine.cs" />
     <Compile Include="Utilities\ERPContext.cs" />
     <Compile Include="Utilities\FocusAdvancement.cs" />
     <Compile Include="Utilities\LedgerTransactionHelper.cs" />
     <Compile Include="Utilities\ModelHelpers\SalesTransactionHelper.cs" />
+    <Compile Include="Utilities\ReceiptPrinter.cs" />
     <Compile Include="Utilities\UtilityMethods.cs" />
     <Compile Include="ViewModels\ItemVM.cs" />
     <Compile Include="ViewModels\SalesNewEntryVM.cs" />
@@ -106,16 +109,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\ItemCategory.cs" />
-    <Compile Include="Models\SalesReturnTransaction.cs" />
-    <Compile Include="Models\SalesReturnTransactionLine.cs" />
-    <Compile Include="Models\SalesTransaction.cs" />
-    <Compile Include="Models\SalesTransactionLine.cs" />
-    <Compile Include="Models\Stock.cs" />
+    <Compile Include="Models\Item\Item.cs" />
+    <Compile Include="Models\Item\ItemCategory.cs" />
+    <Compile Include="Models\Sales\SalesReturnTransaction.cs" />
+    <Compile Include="Models\Sales\SalesReturnTransactionLine.cs" />
+    <Compile Include="Models\Sales\SalesTransaction.cs" />
+    <Compile Include="Models\Sales\SalesTransactionLine.cs" />
+    <Compile Include="Models\Item\Stock.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Models\Item\Warehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="Views\SalesConfirmationView.xaml">
       <SubType>Designer</SubType>

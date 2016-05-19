@@ -1,4 +1,4 @@
-namespace PUJASM.POS.Models
+namespace PUJASM.POS.Models.Item
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

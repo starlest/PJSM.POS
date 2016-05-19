@@ -5,6 +5,7 @@
     using System.Windows;
     using ERP.Models;
     using Models;
+    using Models.Ledger;
 
     public static class LedgerTransactionHelper
     {

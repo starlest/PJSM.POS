@@ -1,4 +1,4 @@
-﻿namespace PUJASM.POS.Models
+﻿namespace PUJASM.POS.Models.Sales
 {
     using System;
     using System.Collections.Generic;

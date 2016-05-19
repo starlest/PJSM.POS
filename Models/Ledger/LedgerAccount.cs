@@ -1,4 +1,4 @@
-﻿namespace PUJASM.POS.Models
+﻿namespace PUJASM.POS.Models.Ledger
 {
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;

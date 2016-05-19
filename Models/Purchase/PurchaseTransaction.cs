@@ -1,4 +1,4 @@
-﻿namespace PUJASM.POS.Models
+﻿namespace PUJASM.POS.Models.Purchase
 {
     using System;
     using System.Collections.ObjectModel;

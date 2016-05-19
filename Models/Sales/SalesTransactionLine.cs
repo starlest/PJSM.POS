@@ -1,16 +1,16 @@
-﻿namespace PUJASM.POS.Models
+namespace PUJASM.POS.Models.Sales
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using MVVMFramework;
+    using Item;
 
-    public class SalesReturnTransactionLine : ObservableObject
+    public class SalesTransactionLine
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string SalesReturnTransactionID { get; set; }
-
+        public string SalesTransactionID { get; set; }
+         
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -20,6 +20,7 @@
         [Column(Order = 2)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int WarehouseID { get; set; }
+
         [Key]
         [Column(Order = 3)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -30,19 +31,13 @@
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public decimal Discount { get; set; }
 
-        [Key]
-        [Column(Order = 5)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public decimal ReturnPrice { get; set; }
-
         [Required]
+        [Column(Order = 5)]
         public int Quantity { get; set; }
 
         [Required]
+        [Column(Order = 6)]
         public decimal Total { get; set; }
-
-        [Required]
-        public decimal CostOfGoodsSold { get; set; }
 
         [ForeignKey("ItemID")]
         public virtual Item Item { get; set; }
@@ -50,7 +45,7 @@
         [ForeignKey("WarehouseID")]
         public virtual Warehouse Warehouse { get; set; }
 
-        [ForeignKey("SalesReturnTransactionID")]
-        public virtual SalesReturnTransaction SalesReturnTransaction { get; set; }
+        [ForeignKey("SalesTransactionID")]
+        public virtual SalesTransaction SalesTransaction { get; set; }
     }
 }

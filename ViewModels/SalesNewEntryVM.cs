@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Windows;
     using Models;
+    using Models.Sales;
     using MVVMFramework;
     using Utilities;
 
